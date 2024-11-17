@@ -57,6 +57,15 @@ public class ControllerStudent {
         return new ApiResponse(  "No Honors "+array) ;
     }
 
+    @GetMapping("/averageGpa")
+public double getAverageGpa() {
+    double totalGpa = 0;
+    for (StudentModel student : array) {
+        totalGpa += student.getGPA();
+    }
+    return totalGpa / array.size();
+}
+
 
 
 
