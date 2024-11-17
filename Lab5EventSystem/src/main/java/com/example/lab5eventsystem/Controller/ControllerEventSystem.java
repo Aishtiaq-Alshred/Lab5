@@ -14,7 +14,7 @@ public class ControllerEventSystem {
 
     ArrayList<ModelEventSystem>array=new ArrayList<>();
 
-    //باقي اري المودل
+    
 
     @GetMapping("/get")
     public ArrayList<ModelEventSystem> getEventSystem(){
@@ -53,7 +53,7 @@ public class ControllerEventSystem {
     }
 
 
-    //بافي مطلوب
+   
 
     @PutMapping("/change/{index}/{Capacity}")
     public ArrayList<ModelEventSystem> changeStauts(@PathVariable int index,@PathVariable String Capacitys) {
