@@ -49,22 +49,47 @@ public class ControllerStudent {
             StudentModel student = array.get(index);
 
             if (student.getGPA() >= 4.75) {
-                return new ApiResponse("First Honors "+array) ;
+                return new ApiResponse("First Honors ") ;
             } else if (student.getGPA() >= 4.25) {
-                return new ApiResponse("Second Honors "+array) ;
+                return new ApiResponse("Second Honors ") ;
             }
         }
-        return new ApiResponse(  "No Honors "+array) ;
+        return new ApiResponse(  "No Honors ") ;
     }
 
-    @GetMapping("/averageGpa")
-public double getAverageGpa() {
-    double totalGpa = 0;
-    for (StudentModel student : array) {
-        totalGpa += student.getGPA();
+  //    //عندي خطأ الافرج هنا لكل الطلاب مفروض اطلع الطلاب اللي اعلى من الافرج
+//    @GetMapping("/averageGpa")
+//    public double getAverageGpa() {
+//        double totalGpa = 0;
+//        for (StudentModel student : array) {
+//            totalGpa += student.getGPA();
+//        }
+//        return totalGpa / array.size();
+//    }
+
+
+    @GetMapping("/studentsAboveAverage")
+    public ApiResponse getStudentsAboveAverage() {
+        double totalGpa = 0;
+
+       
+        for (StudentModel student : array) {
+            totalGpa += student.getGPA();
+        }
+        
+        double averageGpa = totalGpa / array.size();
+        System.out.println("Average GPA: " + averageGpa);
+        
+        ArrayList<StudentModel> studentsAboveAverage = new ArrayList<>();
+        
+        for (StudentModel student : array) {
+            if (student.getGPA() > averageGpa) {
+                studentsAboveAverage.add(student);
+            }
+        }
+        
+        return new ApiResponse(" greater than the average GPA."+studentsAboveAverage) ;
     }
-    return totalGpa / array.size();
-}
 
 
 
