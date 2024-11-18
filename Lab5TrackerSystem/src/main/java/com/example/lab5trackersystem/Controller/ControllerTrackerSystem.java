@@ -68,17 +68,37 @@ public class ControllerTrackerSystem {
         return new ApiResponse(" Task not found ");
     }
 
-    @GetMapping("/compony/{index}/{compony}")
-    public ArrayList<ModelTrackerSystem> display(@PathVariable int index, @PathVariable String Name) {
+   
+////هنا الخطأ يبي كل اسماء المشاريع في الشركه هنا بس طلع اسم اول شركه
+//    @GetMapping("/compony/{company}")
+//    public ArrayList<ModelTrackerSystem> display( @PathVariable String company) {
+//
+//        for (ModelTrackerSystem model : array) {
+//            if (model.getComponyName().equals(company)) {
+//                System.out.println("Project Name: " + model.getComponyName());
+//            }
+//        }
+//        return array;
+//    }
+
+
+    @GetMapping("/company/{company}")
+    public ApiResponse display(@PathVariable String company) {
+        ArrayList<String> projectNames = new ArrayList<>();
 
         for (ModelTrackerSystem model : array) {
-            if (model.getComponyName().equals(Name)) {
-                System.out.println("Project Name: " + model.getComponyName());
+            if (model.getComponyName().equals(company)) {
+
+                projectNames.add(model.getComponyName());
             }
         }
-        return array;
-    }
 
+        if (projectNames.isEmpty()) {
+            projectNames.add("No projects found for the specified company.");
+        }
+
+        return new ApiResponse("All project  one company Name "+projectNames) ;
+    }
 
 
 
